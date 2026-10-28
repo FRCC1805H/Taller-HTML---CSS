@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALJIM - Documentación de Requerimientos</title>
+    <!-- Importar fuente de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0b1120;      /* Azul noche intenso */
+            --primary-light: #2563eb;      /* Azul eléctrico */
+            --secondary-color: #10b981;    /* Verde esmeralda vibrante */
+            --accent-color: #f43f5e;       /* Rosa/Rojo acento */
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --badge-rf: #dbeafe;
+            --badge-rf-text: #1d4ed8;
+            --badge-rnf: #fee2e2;          /* Fondo rojo claro */
+            --badge-rnf-text: #b91c1c;     /* Texto rojo oscuro */
+            --figma-color: #1e1e1e;        /* Botón oscuro para Figma */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- ENCABEZADO MODERNO --- */
+        header {
+            background: var(--primary-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+            color: #ffffff;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--primary-light);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-img {
+            max-height: 110px;
+            width: auto;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- NAVEGACIÓN ESTILO PÍLDORA --- */
+        nav {
+            background-color: transparent;
+            padding: 1.5rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover {
+            background-color: var(--primary-light);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Contenedor principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        /* --- BOTÓN FIGMA PREMIUM --- */
+        .figma-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+            margin-top: 1rem;
+        }
+
+        .btn-figma {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--figma-color);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-figma:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            background-color: #000000;
+        }
+
+        .btn-figma svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* --- DISEÑO DE SECCIONES --- */
+        section {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 3.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            position: relative;
+        }
+
+        /* Decoración de esquina */
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 800;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- TARJETAS DE INTRODUCCIÓN --- */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--primary-light);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- TABLA DE REQUERIMIENTOS MODERNA --- */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #f8fafc;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        th {
+            padding: 1.5rem 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1.5rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            color: var(--text-dark);
+        }
+
+        tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Badges */
+        .badge-code {
+            display: inline-block;
+            background-color: var(--badge-rf);
+            color: var(--badge-rf-text);
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .badge-module {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .req-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+        }
+
+        /* --- TARJETAS DE REQUERIMIENTOS NO FUNCIONALES --- */
+        .rnf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .rnf-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .rnf-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .rnf-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .badge-rnf-code {
+            background-color: var(--badge-rnf);
+            color: var(--badge-rnf-text);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        .rnf-category {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rnf-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .rnf-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            font-size: 0.95rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer strong {
+            color: #ffffff;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- RESPONSIVIDAD --- */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                border-radius: 16px;
+                padding: 1rem;
+            }
+            
+            nav a {
+                text-align: center;
+                display: block;
+            }
+
+            th, td {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Encabezado con logotipo de CALJIM -->
+    <header>
+        <div class="header-container">
+            <!-- RUTA DE IMAGEN CORREGIDA AQUÍ -->
+            <img src="CALJIM.jpeg" alt="Logotipo CALJIM" class="logo-img">
+            <div>
+                <h1>Plataforma Web CALJIM</h1>
+                <p>Documentación técnica de Requerimientos Funcionales y No Funcionales</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#introduccion">Alcance</a></li>
+            <li><a href="#funcionales">Req. Funcionales</a></li>
+            <li><a href="#no-funcionales">Req. No Funcionales</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main>
+
+        <!-- Botón Figma -->
+        <div class="figma-section">
+            <a href="https://www.figma.com/design/Hknfu5xfvyn8grbz9UGrac/CALJIM_Figma?node-id=0-1&t=NJyRlK7fFk7OSUfZ-1" target="_blank" rel="noopener noreferrer" class="btn-figma">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" fill="currentColor">
+                    <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/>
+                    <path d="M0 47.5a9.5 9.5 0 0 1 9.5-9.5H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/>
+                    <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/>
+                    <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/>
+                    <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/>
+                </svg>
+                Ver Prototipo UI/UX en Figma
+            </a>
+        </div>
+
+        <!-- Sección 1: Introducción y Alcance -->
+        <section id="introduccion">
+            <div class="section-header">
+                <h2>Alcance del Proyecto</h2>
+                <p>Resumen ejecutivo de la plataforma</p>
+            </div>
+            <p style="font-size: 1.1rem; text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-muted);">
+                Página dedicada a las especificaciones de requerimientos de la
+                <strong style="color: var(--primary-light); font-weight: 700;">Plataforma Web Integral CALJIM</strong>, enfocada en la gestión de materiales áridos,
+                control de maquinaria pesada, logística de despacho, talento humano y facturación electrónica.
+            </p>
+
+            <div class="info-cards">
+                <article class="info-card">
+                    <h3>12 Requisitos</h3>
+                    <p>Requerimientos funcionales clasificados detalladamente en 5 módulos operativos principales.</p>
+                </article>
+                <article class="info-card">
+                    <h3>5 Criterios de Calidad</h3>
+                    <p>Requerimientos no funcionales enfocados en disponibilidad, rendimiento, usabilidad y seguridad de la nube.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Arquitectura Web</h3>
+                    <p>Diseño y presentación estructurada de los requerimientos utilizando estándares HTML5 y CSS3 modernos.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección 2: Requerimientos Funcionales -->
+        <section id="funcionales">
+            <div class="section-header">
+                <h2>Requerimientos Funcionales</h2>
+                <p>Capacidades específicas y comportamiento del sistema</p>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">Cód.</th>
+                            <th style="width: 25%;">Requerimiento</th>
+                            <th style="width: 23%;">Módulo Asignado</th>
+                            <th style="width: 40%;">Descripción Detallada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge-code">RF-01</span></td>
+                            <td class="req-title">Gestión de Inventario en Vivo</td>
+                            <td><span class="badge-module">Materiales e Inventario</span></td>
+                            <td>Los administradores pueden gestionar el stock. Los clientes visualizan la disponibilidad actualizada de materiales áridos en tiempo real.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-02</span></td>
+                            <td class="req-title">Cálculo de Volumen (m³)</td>
+                            <td><span class="badge-module">Materiales e Inventario</span></td>
+                            <td>La interfaz permite calcular el volumen necesario en metros cúbicos, generando precios, subtotales y totales con impuestos de forma automática.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-03</span></td>
+                            <td class="req-title">Flujo de Pedidos Tripartito</td>
+                            <td><span class="badge-module">Logística y Despacho</span></td>
+                            <td>Sincronización del ciclo del pedido (solicitado, cargado, entregado) notificando simultáneamente al cliente, conductor y administración.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-04</span></td>
+                            <td class="req-title">Rastreo Satelital GPS</td>
+                            <td><span class="badge-module">Logística y Despacho</span></td>
+                            <td>Vista interactiva de mapa para que el cliente monitoree en tiempo real la ubicación del vehículo que transporta su material.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-05</span></td>
+                            <td class="req-title">Trazabilidad de Rutas</td>
+                            <td><span class="badge-module">Logística y Despacho</span></td>
+                            <td>Registro georreferenciado de la maquinaria pesada, generando un historial auditable de velocidad, paradas y recorridos.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-06</span></td>
+                            <td class="req-title">Estados de Maquinaria</td>
+                            <td><span class="badge-module">Mantenimiento</span></td>
+                            <td>Clasificación visual en tiempo real de equipos: Disponible, Alquilado, En Ruta o En Mantenimiento.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-07</span></td>
+                            <td class="req-title">Mantenimiento Preventivo</td>
+                            <td><span class="badge-module">Mantenimiento</span></td>
+                            <td>Alertas automáticas por horas de uso para mantenimiento, registro de repuestos, costos e historial de intervenciones correctivas.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-08</span></td>
+                            <td class="req-title">Registro de Jornadas</td>
+                            <td><span class="badge-module">Talento Humano</span></td>
+                            <td>Control digital de horas efectivas trabajadas por los operarios mediante marcación o asignación directa a órdenes en campo.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-09</span></td>
+                            <td class="req-title">Liquidación de Nómina</td>
+                            <td><span class="badge-module">Talento Humano</span></td>
+                            <td>Cálculo automatizado de pagos netos basado en horas laboradas, tarifas preconfiguradas y generación de comprobantes.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-10</span></td>
+                            <td class="req-title">Mensajería Operativa</td>
+                            <td><span class="badge-module">Comunicación</span></td>
+                            <td>Canal interno con notificaciones push para coordinar tareas, rutas e incidencias mecánicas entre administración y operadores.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-11</span></td>
+                            <td class="req-title">Facturación Electrónica</td>
+                            <td><span class="badge-module">Finanzas</span></td>
+                            <td>Emisión y descarga de comprobantes detallando el costo del material (m³), servicio de flete e impuestos aplicables.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-code">RF-12</span></td>
+                            <td class="req-title">Dashboard Analítico</td>
+                            <td><span class="badge-module">Finanzas</span></td>
+                            <td>Panel interactivo con gráficas de volumen despachado e ingresos, filtrables dinámicamente por periodos de tiempo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección 3: Requerimientos No Funcionales -->
+        <section id="no-funcionales">
+            <div class="section-header">
+                <h2>Requerimientos No Funcionales</h2>
+                <p>Restricciones y atributos de calidad técnica</p>
+            </div>
+
+            <div class="rnf-grid">
+                <!-- RNF-01 -->
+                <article class="rnf-card">
+                    <div class="rnf-header">
+                        <span class="badge-rnf-code">RNF-01</span>
+                        <span class="rnf-category">Disponibilidad</span>
+                    </div>
+                    <h3>Arquitectura Cloud 24/7</h3>
+                    <p>
+                        Despliegue en un entorno de computación en la nube garantizando un uptime del 99.5%, con compatibilidad total en navegadores modernos (Chrome, Firefox, Safari, Edge).
+                    </p>
+                </article>
+
+                <!-- RNF-02 -->
+                <article class="rnf-card">
+                    <div class="rnf-header">
+                        <span class="badge-rnf-code">RNF-02</span>
+                        <span class="rnf-category">Usabilidad</span>
+                    </div>
+                    <h3>Diseño Adaptativo / Mobile-First</h3>
+                    <p>
+                        Interfaces optimizadas fluidamente tanto para resoluciones de escritorio en oficinas administrativas como para visualización en tablets y móviles en el trabajo de campo.
+                    </p>
+                </article>
+
+                <!-- RNF-03 -->
+                <article class="rnf-card">
+                    <div class="rnf-header">
+                        <span class="badge-rnf-code">RNF-03</span>
+                        <span class="rnf-category">Rendimiento</span>
+                    </div>
+                    <h3>Latencia y Refresco de Datos</h3>
+                    <p>
+                        Tiempo máximo de respuesta de 2 segundos para consultas de inventario. Actualización continua de coordenadas GPS de los vehículos cada 5 a 10 segundos.
+                    </p>
+                </article>
+
+                <!-- RNF-04 -->
+                <article class="rnf-card">
+                    <div class="rnf-header">
+                        <span class="badge-rnf-code">RNF-04</span>
+                        <span class="rnf-category">Seguridad</span>
+                    </div>
+                    <h3>Control de Acceso (RBAC)</h3>
+                    <p>
+                        Autenticación cifrada mediante tokens JWT gestionando permisos estrictos basados en tres roles jerárquicos: Administrador central, Operador de maquinaria y Cliente.
+                    </p>
+                </article>
+
+                <!-- RNF-05 -->
+                <article class="rnf-card">
+                    <div class="rnf-header">
+                        <span class="badge-rnf-code">RNF-05</span>
+                        <span class="rnf-category">Integridad</span>
+                    </div>
+                    <h3>Transacciones y Backups</h3>
+                    <p>
+                        Ejecución de transacciones atómicas (ACID) para evitar inconsistencias financieras, respaldadas por políticas automatizadas de copias de seguridad de la base de datos a diario.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p><strong>CALJIM</strong> © 2026</p>
+        <p>Proyecto para la asignatura de Ingeniería Web</p>
+    </footer>
+
+</body>
+</html>
