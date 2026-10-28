@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CALJIM - Documentación de Requerimientos</title>
+    <title>CALJIM - Documentación de Requerimientos y Stack</title>
     <!-- Importar fuente de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -184,7 +184,7 @@
             height: 28px;
         }
 
-        /* --- DISEÑO DE SECCIONES --- */
+        /* --- DISEÑO DE SECCIONES GLOBALES --- */
         section {
             background: var(--bg-card);
             border-radius: 24px;
@@ -195,7 +195,6 @@
             position: relative;
         }
 
-        /* Decoración de esquina */
         section::before {
             content: '';
             position: absolute;
@@ -224,6 +223,61 @@
         .section-header p {
             color: var(--text-muted);
             font-size: 1.1rem;
+        }
+
+        /* --- STACK TECNOLÓGICO --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .tech-frontend::before { background-color: #3b82f6; } /* Azul para Frontend */
+        .tech-backend::before { background-color: #8b5cf6; }  /* Morado para PHP */
+        .tech-database::before { background-color: #f59e0b; } /* Naranja para MySQL */
+        .tech-reports::before { background-color: #ef4444; }  /* Rojo para PDF */
+
+        .tech-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin: 0.5rem 0 1rem 0;
+            font-weight: 700;
+        }
+
+        .tech-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         /* --- TARJETAS DE INTRODUCCIÓN --- */
@@ -476,11 +530,10 @@
     <!-- Encabezado con logotipo de CALJIM -->
     <header>
         <div class="header-container">
-            <!-- RUTA DE IMAGEN CORREGIDA AQUÍ -->
             <img src="CALJIM.jpeg" alt="Logotipo CALJIM" class="logo-img">
             <div>
                 <h1>Plataforma Web CALJIM</h1>
-                <p>Documentación técnica de Requerimientos Funcionales y No Funcionales</p>
+                <p>Documentación técnica de Requerimientos y Arquitectura</p>
             </div>
         </div>
     </header>
@@ -489,6 +542,7 @@
     <nav>
         <ul>
             <li><a href="#introduccion">Alcance</a></li>
+            <li><a href="#stack">Stack Tecnológico</a></li>
             <li><a href="#funcionales">Req. Funcionales</a></li>
             <li><a href="#no-funcionales">Req. No Funcionales</a></li>
         </ul>
@@ -539,7 +593,37 @@
             </div>
         </section>
 
-        <!-- Sección 2: Requerimientos Funcionales -->
+        <!-- Sección 2: Stack Tecnológico NUEVA SECCIÓN -->
+        <section id="stack">
+            <div class="section-header">
+                <h2>Stack Tecnológico</h2>
+                <p>Tecnologías e integraciones seleccionadas para el desarrollo</p>
+            </div>
+            
+            <div class="tech-grid">
+                <article class="tech-card tech-frontend">
+                    <h3>Frontend</h3>
+                    <p>HTML5 + CSS3 + <strong>JavaScript Moderno (Fetch API)</strong> para el consumo de datos. Se integra <strong>Leaflet.js</strong> para el rastreo de mapas satelitales y <strong>Chart.js</strong> para la analítica del Dashboard.</p>
+                </article>
+
+                <article class="tech-card tech-backend">
+                    <h3>Backend (Servidor)</h3>
+                    <p>Desarrollo en <strong>PHP 8</strong> utilizando conexiones seguras con <strong>PDO</strong>. La arquitectura del código estará organizada siguiendo el patrón MVC (Carpetas separadas para: Controladores, Modelos y Vistas).</p>
+                </article>
+
+                <article class="tech-card tech-database">
+                    <h3>Base de Datos</h3>
+                    <p>Sistema de gestión relacional <strong>MySQL</strong> bajo el motor <strong>InnoDB</strong> para asegurar la integridad de las transacciones (ACID). Todo el entorno será administrado localmente vía phpMyAdmin en XAMPP.</p>
+                </article>
+
+                <article class="tech-card tech-reports">
+                    <h3>Reportes y Facturación</h3>
+                    <p>Implementación de la librería <strong>DomPDF</strong> en el servidor para transformar vistas HTML dinámicas en comprobantes y facturas de despacho en formato PDF descargable.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección 3: Requerimientos Funcionales -->
         <section id="funcionales">
             <div class="section-header">
                 <h2>Requerimientos Funcionales</h2>
@@ -579,7 +663,7 @@
                             <td><span class="badge-code">RF-04</span></td>
                             <td class="req-title">Rastreo Satelital GPS</td>
                             <td><span class="badge-module">Logística y Despacho</span></td>
-                            <td>Vista interactiva de mapa para que el cliente monitoree en tiempo real la ubicación del vehículo que transporta su material.</td>
+                            <td>Vista interactiva de mapa (Leaflet.js) para monitorear en tiempo real la ubicación del vehículo que transporta el material.</td>
                         </tr>
                         <tr>
                             <td><span class="badge-code">RF-05</span></td>
@@ -621,20 +705,20 @@
                             <td><span class="badge-code">RF-11</span></td>
                             <td class="req-title">Facturación Electrónica</td>
                             <td><span class="badge-module">Finanzas</span></td>
-                            <td>Emisión y descarga de comprobantes detallando el costo del material (m³), servicio de flete e impuestos aplicables.</td>
+                            <td>Emisión y descarga de facturas en PDF (DomPDF) detallando el costo del material (m³), flete e impuestos aplicables.</td>
                         </tr>
                         <tr>
                             <td><span class="badge-code">RF-12</span></td>
                             <td class="req-title">Dashboard Analítico</td>
                             <td><span class="badge-module">Finanzas</span></td>
-                            <td>Panel interactivo con gráficas de volumen despachado e ingresos, filtrables dinámicamente por periodos de tiempo.</td>
+                            <td>Panel interactivo (Chart.js) con gráficas de volumen despachado e ingresos, filtrables dinámicamente.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Sección 3: Requerimientos No Funcionales -->
+        <!-- Sección 4: Requerimientos No Funcionales -->
         <section id="no-funcionales">
             <div class="section-header">
                 <h2>Requerimientos No Funcionales</h2>
@@ -674,7 +758,7 @@
                     </div>
                     <h3>Latencia y Refresco de Datos</h3>
                     <p>
-                        Tiempo máximo de respuesta de 2 segundos para consultas de inventario. Actualización continua de coordenadas GPS de los vehículos cada 5 a 10 segundos.
+                        Tiempo máximo de respuesta de 2 segundos para consultas de inventario vía Fetch API. Actualización continua de coordenadas GPS de los vehículos cada 5 a 10 segundos.
                     </p>
                 </article>
 
@@ -686,7 +770,7 @@
                     </div>
                     <h3>Control de Acceso (RBAC)</h3>
                     <p>
-                        Autenticación cifrada mediante tokens JWT gestionando permisos estrictos basados en tres roles jerárquicos: Administrador central, Operador de maquinaria y Cliente.
+                        Autenticación segura en PHP gestionando permisos estrictos basados en roles jerárquicos: Administrador central, Operador de maquinaria y Cliente.
                     </p>
                 </article>
 
@@ -696,9 +780,9 @@
                         <span class="badge-rnf-code">RNF-05</span>
                         <span class="rnf-category">Integridad</span>
                     </div>
-                    <h3>Transacciones y Backups</h3>
+                    <h3>Transacciones (InnoDB)</h3>
                     <p>
-                        Ejecución de transacciones atómicas (ACID) para evitar inconsistencias financieras, respaldadas por políticas automatizadas de copias de seguridad de la base de datos a diario.
+                        Ejecución de transacciones atómicas (ACID) en MySQL InnoDB para evitar inconsistencias financieras, respaldadas por políticas de copias de seguridad de la BD a diario.
                     </p>
                 </article>
             </div>
