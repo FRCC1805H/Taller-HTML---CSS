@@ -3,7 +3,7 @@
 Documentación técnica y especificación de requerimientos del sistema *CALJIM*.
 
 ## Autor de la Maquetación Individual:
-- *Jonathan Guayllas*
+- *Fabian Cañar*
 
 ## Integrantes del Grupo:
 - Jonathan Guayllas 
